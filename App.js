@@ -23,7 +23,7 @@ export default function App() {
         </TouchableOpacity>
       </View>
       <View style={styles.suggestion}>
-        <Text>Don't have account?<Text>Sign Up</Text></Text>
+        <Text>Don't have account?<Text style={{color: 'red'}}>Sign Up</Text></Text>
       </View>
     </View>
   );
