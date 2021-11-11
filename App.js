@@ -1,71 +1,62 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React from "react";
+import {
+  SafeAreaView,
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  StatusBar,
+} from "react-native";
 
-export default function App() {
+const DATA = [
+  {
+    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+    name: "First Item",
+  },
+  {
+    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+    name: "Second Item",
+  },
+  {
+    id: "58694a0f-3da1-471f-bd96-145571e29d72",
+    name: "Third Item",
+  },
+];
+
+const Item = ({ name }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{name}</Text>
+  </View>
+);
+
+const App = () => {
+  const renderItem = ({ item }) => <Item title={item.name} />;
+
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text>Log in</Text>
-      </View>
-      <View style={styles.form}>
-        <TextInput style={styles.inputs} placeholder="Username"/>
-        <TextInput style={styles.inputs} placeholder="Password"/>
-        
-        <Text style={{color: '#0E9EB5',fontSize: '12px'}}
-          onPress={() => Linking.openURL('')}>
-          Forgot Password?
-        </Text>
-      </View>
-      <View style={styles.button}>
-        <TouchableOpacity>
-          <Text>Log in</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.suggestion}>
-        <Text>Don't have account?<Text style={{color: 'red'}}>Sign Up</Text></Text>
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
+    </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 100,
-    marginBottom: 100,
-    marginRight: 20,
-    marginLeft: 20,
-    elevation: 5,
-    borderRadius: 10
+    marginTop: StatusBar.currentHeight || 0,
   },
-  header: {
-    flex: 2,
-    width: '90%',
-    backgroundColor: 'azure'
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
-  form: {
-    flex: 2,
-    width: '90%',
-    backgroundColor: 'tomato',
-    padding: 30
+  title: {
+    fontSize: 32,
   },
-  button: {
-    flex: 2,
-    width: '90%',
-    backgroundColor: 'violet'
-  },
-  suggestion: {
-    flex: 2,
-    width: '90%',
-    backgroundColor: 'yellow'
-  },
-  inputs: {
-    fontSize: 15,
-    borderBottomWidth: 2,
-    margin: 10
-  }
 });
+
+export default App;
